@@ -1,0 +1,29 @@
+[
+  {
+    "model": "tunaapi.artist",
+    "pk": 1,
+    "fields": {
+        "name": "Lady Gaga",
+        "age": 37,
+        "bio": "Stefani Joanne Angelina Germanotta  (born March 28, 1986), known professionally as Lady Gaga, is an American singer, songwriter and actress. She is known for her image reinventions and musical versatility."
+      }
+  },
+  {
+    "model": "tunaapi.artist",
+    "pk": 2,
+    "fields": {
+        "name": "Bruno Mars",
+        "age": 37,
+        "bio": "Peter Gene Hernandez (born October 8, 1985), known professionally as Bruno Mars, is an American singer, songwriter, and record producer. He is known for his stage performances, retro showmanship, and for performing in a wide range of musical styles, including pop, R&B, funk, soul, reggae, disco, and rock."
+      }
+  },
+  {
+    "model": "tunaapi.artist",
+    "pk": 3,
+    "fields": {
+        "name": "Beyoncé",
+        "age": 41,
+        "bio": "Beyoncé Giselle Knowles-Carter (born September 4, 1981) is an American singer, songwriter, and businesswoman. Nicknamed 'Queen Bey', she has been widely recognized for her boundary-pushing artistry and vocal performances. Beyoncé is regarded as one of the greatest entertainers of her generation, and an influential figure in contemporary popular music."
+      }
+  }
+]
