@@ -3,10 +3,30 @@
     "model": "tunaapi.song",
     "pk": 1,
     "fields": {
-      "title": 
-      "artist_id":
-      "album":
-      "length": 
-    }
+      "title": "24K Magic",
+      "artist_id": 2,
+      "album": "24K Magic",
+      "length": "00 00:03:45"
+      }
+  },
+  {
+    "model": "tunaapi.song",
+    "pk": 2,
+    "fields": {
+      "title": "Bad Romance",
+      "artist_id": 1,
+      "album": "The Fame Monster",
+      "length": "00 00:04:21"
+      }
+  },
+  {
+    "model": "tunaapi.song",
+    "pk": 3,
+    "fields": {
+      "title": "Formation",
+      "artist_id": 3,
+      "album": "Lemonade",
+      "length": "00 00:03:26"
+      }
   }
 ]
