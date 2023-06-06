@@ -14,7 +14,7 @@ class ArtistView(ViewSet):
       """Handle GET requests for single artist
       
       Returns:
-        Response -- jSON serialized artist
+        Response -- JSON serialized artist
       """
       
       artist = Artist.objects.get(pk=pk)
