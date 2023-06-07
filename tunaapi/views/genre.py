@@ -16,10 +16,12 @@ class GenreView(ViewSet):
       Returns:
         Response -- JSON serialized genre
         """
-        
-      genre = Genre.objects.get(pk=pk)
-      serializer = GenreSerializer(genre)
-      return Response(serializer.data)
+      try: 
+          genre = Genre.objects.get(pk=pk)
+          serializer = GenreSerializer(genre)
+          return Response(serializer.data)
+      except Genre.DoesNotExist as ex:
+          return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
     
     def list(self, request):
       """Handle GET requests to get all genres

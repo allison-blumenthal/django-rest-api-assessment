@@ -16,10 +16,12 @@ class SongView(ViewSet):
       Returns:
         Response -- JSON serialized song
         """
-        
-      song = Song.objects.get(pk=pk)
-      serializer = SongSerializer(song)
-      return Response(serializer.data)
+      try:  
+          song = Song.objects.get(pk=pk)
+          serializer = SongSerializer(song)
+          return Response(serializer.data)
+      except Song.DoesNotExist as ex:
+          return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
     
     def list(self, request):
       """Handle GET requests to get all songs
