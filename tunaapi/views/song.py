@@ -32,7 +32,7 @@ class SongView(ViewSet):
       
       songs = Song.objects.all()
       
-      artist = request.query_params.get('type', None)
+      artist = request.query_params.get('artist_id', None)
       if artist is not None:
           songs = songs.filter(artist_id_id=artist)
           
@@ -46,3 +46,4 @@ class SongSerializer(serializers.ModelSerializer):
   class Meta:
       model = Song
       fields = ('id', 'title', 'artist_id', 'album', 'length')
+      depth = 1
