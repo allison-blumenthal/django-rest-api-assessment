@@ -79,6 +79,12 @@ class SongView(ViewSet):
         song.save()
         
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+      
+      
+    def destroy(self, request, pk):
+        song = Song.objects.get(pk=pk)
+        song.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
         
 
 class SongSerializer(serializers.ModelSerializer):
