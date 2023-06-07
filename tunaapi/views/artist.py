@@ -24,6 +24,7 @@ class ArtistView(ViewSet):
       except Artist.DoesNotExist as ex:
           return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
       
+      
     def list(self, request): 
       """Handle GET requests to get all artists
     
@@ -34,6 +35,7 @@ class ArtistView(ViewSet):
       artists = Artist.objects.all()
       serializer = ArtistSerializer(artists, many=True)
       return Response(serializer.data)
+    
     
     def create(self, request):
       """Handle POST operations for artists
@@ -48,6 +50,7 @@ class ArtistView(ViewSet):
       )
       serializer = ArtistSerializer(artist)
       return Response(serializer.data)
+    
     
     def update(self, request, pk):
       """Handle PUT requests for an artist

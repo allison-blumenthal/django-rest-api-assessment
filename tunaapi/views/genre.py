@@ -23,6 +23,7 @@ class GenreView(ViewSet):
       except Genre.DoesNotExist as ex:
           return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
     
+    
     def list(self, request):
       """Handle GET requests to get all genres
       
@@ -33,6 +34,7 @@ class GenreView(ViewSet):
       genres = Genre.objects.all()
       serializer = GenreSerializer(genres, many=True)
       return Response(serializer.data)
+    
     
     def create(self, request):
       """Handle POST operations for genres
@@ -46,6 +48,20 @@ class GenreView(ViewSet):
       )
       serializer = GenreSerializer(genre)
       return Response(serializer.data)
+    
+    def update(self, request, pk):
+        """Handle PUT requests for a genre
+        
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        
+        genre = Genre.objects.get(pk=pk)
+        genre.description = request.data["description"]
+        
+        genre.save()
+        
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 class GenreSerializer(serializers.ModelSerializer):
   """JSON serializer for genres"""

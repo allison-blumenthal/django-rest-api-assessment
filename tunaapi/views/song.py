@@ -24,6 +24,7 @@ class SongView(ViewSet):
       except Song.DoesNotExist as ex:
           return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
     
+    
     def list(self, request):
       """Handle GET requests to get all songs
       
@@ -40,6 +41,7 @@ class SongView(ViewSet):
           
       serializer = SongSerializer(songs, many=True)
       return Response(serializer.data)
+    
     
     def create(self, request):
       """Handle POST operations for songs
@@ -59,6 +61,25 @@ class SongView(ViewSet):
       serializer = SongSerializer(song)
       return Response(serializer.data)
     
+    
+    def update(self, request, pk):
+        """Handle PUT requests for a song
+        
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        
+        song = Song.objects.get(pk=pk)
+        song.title = request.data["title"]
+        song.album = request.data["album"]
+        song.length = parse_duration(request.data["length"])
+        
+        artist_id = Artist.objects.get(pk=request.data["artistId"])
+        song.artist_id = artist_id
+        song.save()
+        
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+        
 
 class SongSerializer(serializers.ModelSerializer):
   """JSON serializer for songs"""
