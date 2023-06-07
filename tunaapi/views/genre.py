@@ -16,10 +16,12 @@ class GenreView(ViewSet):
       Returns:
         Response -- JSON serialized genre
         """
-        
-      genre = Genre.objects.get(pk=pk)
-      serializer = GenreSerializer(genre)
-      return Response(serializer.data)
+      try: 
+          genre = Genre.objects.get(pk=pk)
+          serializer = GenreSerializer(genre)
+          return Response(serializer.data)
+      except Genre.DoesNotExist as ex:
+          return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
     
     def list(self, request):
       """Handle GET requests to get all genres
@@ -32,6 +34,18 @@ class GenreView(ViewSet):
       serializer = GenreSerializer(genres, many=True)
       return Response(serializer.data)
     
+    def create(self, request):
+      """Handle POST operations for genres
+      
+      Returns:
+          Response -- JSON serialized genre instance 
+      """
+
+      genre = Genre.objects.create(
+          description=request.data["description"], 
+      )
+      serializer = GenreSerializer(genre)
+      return Response(serializer.data)
 
 class GenreSerializer(serializers.ModelSerializer):
   """JSON serializer for genres"""
@@ -39,3 +53,4 @@ class GenreSerializer(serializers.ModelSerializer):
   class Meta:
       model = Genre
       fields = ('id', 'description')
+      depth = 1
