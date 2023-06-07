@@ -32,6 +32,7 @@ class SongView(ViewSet):
       
       songs = Song.objects.all()
       
+      # filter to query songs by artist_id
       artist = request.query_params.get('artist_id', None)
       if artist is not None:
           songs = songs.filter(artist_id_id=artist)
