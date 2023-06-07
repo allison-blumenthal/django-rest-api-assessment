@@ -29,6 +29,11 @@ class SongView(ViewSet):
       """
       
       songs = Song.objects.all()
+      
+      artist = request.query_params.get('type', None)
+      if artist is not None:
+          songs = songs.filter(artist_id_id=artist)
+          
       serializer = SongSerializer(songs, many=True)
       return Response(serializer.data)
     
