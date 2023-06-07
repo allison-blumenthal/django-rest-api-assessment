@@ -18,7 +18,7 @@ class GenreView(ViewSet):
         """
         
       genre = Genre.objects.get(pk=pk)
-      serializer = GenreSerializer(song)
+      serializer = GenreSerializer(genre)
       return Response(serializer.data)
     
     def list(self, request):
