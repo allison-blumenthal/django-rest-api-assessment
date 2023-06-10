@@ -10,4 +10,4 @@ class Song(models.Model):
   length = models.DurationField()
   
   def genres(self):
-    return [song_genre.genre_id for song_genre in self.song_genres.all()]
+    return [genre_song.genre_id for genre_song in self.genre_song.all()]
