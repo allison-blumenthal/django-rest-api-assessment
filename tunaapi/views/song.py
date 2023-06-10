@@ -35,11 +35,17 @@ class SongView(ViewSet):
       """
       
       songs = Song.objects.all()
+      song_genres = SongGenre.objects.all()
       
       # filter to query songs by artist_id
       artist = request.query_params.get('artist_id', None)
       if artist is not None:
           songs = songs.filter(artist_id_id=artist)
+          
+      # filter to query songs by genre_id
+      genre = request.query_params.get('genre_id', None)
+      if genre is not None:
+          songs = song_genres.filter(genre_id=genre)
           
       serializer = SongSerializer(songs, many=True)
       return Response(serializer.data)
