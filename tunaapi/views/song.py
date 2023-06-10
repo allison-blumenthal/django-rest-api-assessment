@@ -8,6 +8,7 @@ from django.utils.dateparse import parse_duration
 
 
 
+
 class SongView(ViewSet):
     """Tuna api song view"""
     
@@ -51,7 +52,6 @@ class SongView(ViewSet):
       #   for song_genre in song_genres:
       #       songs = songs.filter(id=genre)
         
-      
       serializer = SongSerializer(songs, many=True)
       return Response(serializer.data)
     
