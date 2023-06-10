@@ -35,6 +35,23 @@ class SongGenreView(ViewSet):
       song_genres = SongGenre.objects.all()   
       serializer = SongGenreSerializer(song_genres, many=True)
       return Response(serializer.data)
+  
+    def create(self, request):
+        """Handle POST operations for song_genres
+        
+        Returns
+            Response -- JSON serialized song_genre instance
+        """
+        
+        song_id = Song.objects.get(pk=request.data["songId"])
+        genre_id = Genre.objects.get(pk=request.data["genreId"])
+        
+        song_genre = SongGenre.objects.create(
+            song_id=song_id,
+            genre_id=genre_id
+        )
+        serializer = SongGenreSerializer(song_genre)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class SongGenreSerializer(serializers.ModelSerializer):
   """JSON serializer for song_genres"""
@@ -42,4 +59,4 @@ class SongGenreSerializer(serializers.ModelSerializer):
   class Meta:
       model = SongGenre
       fields = ('id', 'song_id', 'genre_id')
-      depth = 2
+      depth = 0

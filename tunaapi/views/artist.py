@@ -33,7 +33,7 @@ class ArtistView(ViewSet):
           Response -- JSON serialized list of artists
       """
      
-      artists = Artist.objects.all()
+      artists = Artist.objects.annotate(song_count=Count('songs')).all()
       serializer = ArtistSerializer(artists, many=True)
       return Response(serializer.data)
     
@@ -83,4 +83,4 @@ class ArtistSerializer(serializers.ModelSerializer):
   class Meta:
       model = Artist
       fields = ('id', 'name', 'age', 'bio', 'song_count', 'songs')
-      depth = 1
+      depth = 2
