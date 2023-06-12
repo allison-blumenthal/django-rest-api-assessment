@@ -36,11 +36,12 @@ class SongView(ViewSet):
       """
       
       songs = Song.objects.all()
+      
       # filter to query songs by artist_id
       artist = request.query_params.get('artist_id', None)
       if artist is not None:
           songs = songs.filter(artist_id_id=artist)
-      
+  
           
       # filter to query songs by genre_id
       # genre = request.query_params.get('genre_id', None)
@@ -100,15 +101,15 @@ class SongView(ViewSet):
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
         
-# class SongGenreSerializer(serializers.ModelSerializer):
-#   class Meta:
-#       model = SongGenre
-#       fields = ('genre_id', )
-#       depth = 1
+class SongGenreSerializer(serializers.ModelSerializer):
+  class Meta:
+      model = SongGenre
+      fields = ('genre_id', )
+      depth = 1
       
 class SongSerializer(serializers.ModelSerializer):
   """JSON serializer for songs"""
-  # genres = SongGenreSerializer(many=True, read_only=True)
+  genres = SongGenreSerializer(many=True, read_only=True)
   
   class Meta:
       model = Song
