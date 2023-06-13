@@ -34,6 +34,12 @@ class ArtistView(ViewSet):
       """
      
       artists = Artist.objects.annotate(song_count=Count('songs')).all()
+      
+      # filter to query artists by genre_id
+      requested_genre = request.query_params.get('genre_id', None)
+      if requested_genre is not None:
+        artists = Artist.objects.filter(songs__genres__genre_id=requested_genre)
+      
       serializer = ArtistSerializer(artists, many=True)
       return Response(serializer.data)
     

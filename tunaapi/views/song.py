@@ -41,8 +41,7 @@ class SongView(ViewSet):
       artist = request.query_params.get('artist_id', None)
       if artist is not None:
           songs = songs.filter(artist_id_id=artist)
-  
-          
+   
       # filter to query songs by genre_id
       requested_genre = request.query_params.get('genre_id', None)
       
